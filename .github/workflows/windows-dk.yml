@@ -34,6 +34,7 @@ jobs:
 
     - name: Install GMP library and Z3 executable
       if: steps.cache-vcpkg-z3.outputs.cache-hit != 'true'
+      shell: pwsh -command ". '{0}'"
       run: |
         .github/setup-vcpkg.cmd
         .github/setup-z3.cmd
