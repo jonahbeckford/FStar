@@ -3,7 +3,7 @@ name: FStar Windows Package built with Dk
 on:
   push:
     branches:
-      - 'dkml'
+      - 'dkml2'
   pull_request:
   workflow_dispatch:
 
@@ -11,8 +11,8 @@ jobs:
 
   build-windows:
 
-    runs-on: [self-hosted, Windows, X64]
-    #runs-on: windows-2022
+    #runs-on: [self-hosted, Windows, X64]
+    runs-on: windows-2022
 
     # Use POSIX shell as default.
     defaults:
