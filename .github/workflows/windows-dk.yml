@@ -84,7 +84,9 @@ jobs:
       # Test in PowerShell with:
       #   $env:CHERE_INVOKING = "yes"; $env:MSYSTEM = "CLANG64"; msys64\usr\bin\dash.exe -lc 'export OPAMYES=1 TRIPLET=x64-windows MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL=\*; export VCPKG_INSTALLED=$(cygpath -am vcpkg_installed/$TRIPLET); export FSTAR_HOME="$PWD/src/ocaml-output/fstar"; PATH="$PWD/.ci/sd4/opamrun:$PWD/vcpkg_installed/$TRIPLET/bin:$PWD/z3_installed/bin:$PATH"; opamrun pin process git+https://github.com/tahina-pro/ocaml-process.git#taramana_dune --no-action && opamrun install ./ocaml/repo/packages/conf-gmp/conf-gmp.4+vcpkg/opam && env "PKG_CONFIG_PATH=$VCPKG_INSTALLED/lib/pkgconfig" opamrun install dune sedlex memtrace ppx_deriving ppx_deriving_yojson menhir process pprint stdint zarith batteries && opamrun exec -- make package DOTNET=$(cygpath -am dotnet/dotnet.exe)'
       run: |
-          env
+          echo "MSYS2_ARG_CONV_EXCL=$MSYS2_ARG_CONV_EXCL"
+          echo "PATH=$PATH"
+          echo "MSYSTEM=$MSYSTEM"
           export VCPKG_INSTALLED=$(cygpath -am "vcpkg_installed/$TRIPLET")
           export FSTAR_HOME=$PWD/src/ocaml-output/fstar
           PATH="$PWD/.ci/sd4/opamrun:$PWD/vcpkg_installed/$TRIPLET/bin:$PWD/z3_installed/bin:$PATH"
