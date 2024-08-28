@@ -51,7 +51,7 @@ jobs:
 
     - name: Restore DkML distribution from cache
       uses: actions/cache/restore@v4
-      id: cache-dkml-dist
+      id: cache-dkml-dist-2
       with:
         path: |
           .ci/o
@@ -60,7 +60,7 @@ jobs:
         key: dkml-dist-2-${{ runner.os }}
 
     - name: Setup DkML distribution
-      if: steps.cache-dkml-dist.outputs.cache-hit != 'true'
+      if: steps.cache-dkml-dist-2.outputs.cache-hit != 'true'
       shell: powershell -command ". '{0}'"
       run: |
         .github/setup-dkml.cmd
@@ -68,13 +68,13 @@ jobs:
     - name: Cache DkML distribution
       uses: actions/cache/save@v4
       # always save cache, even on failures
-      if: steps.cache-dkml-dist.outputs.cache-hit != 'true'
+      if: steps.cache-dkml-dist-2.outputs.cache-hit != 'true'
       with:
         path: |
           .ci/o
           .ci/sd4
           msys64
-        key: ${{ steps.cache-dkml-dist.outputs.cache-primary-key }}
+        key: ${{ steps.cache-dkml-dist-2.outputs.cache-primary-key }}
 
     - name: Setup .NET
       shell: powershell -command ". '{0}'"
